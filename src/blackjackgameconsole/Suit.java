@@ -7,7 +7,7 @@ package blackjackgameconsole;
 
 /**
  *
- * @author neilb
+ * @author neilb, tommy chiu
  */
 public enum Suit {
      CLUB, DIAMOND, SPADE, HEART
