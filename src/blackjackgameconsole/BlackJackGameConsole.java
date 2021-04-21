@@ -7,7 +7,7 @@ package blackjackgameconsole;
 
 /**
  *
- * @author neilb, tommy chiu
+ * @author neilb, tommy chiu, Adrian Davies
  */
 import java.util.Scanner;
 
