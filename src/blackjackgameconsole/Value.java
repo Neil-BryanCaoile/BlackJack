@@ -7,7 +7,7 @@ package blackjackgameconsole;
 
 /**
  *
- * @author neilb, tommy chiu
+ * @author neilb, tommy chiu, Adrian Davies
  */
 public enum Value {
     TWO , THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, KING, QUEEN, ACE
