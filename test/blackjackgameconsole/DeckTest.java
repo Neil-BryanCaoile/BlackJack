@@ -37,45 +37,41 @@ public class DeckTest {
     public void tearDown() {
     }
 
-    
+        
     /**
-     * Test of getCard method, of class Deck.
+     * Test of toString method, of class Deck.
      */
     @Test
-    public void testGetCardGood() {
-        System.out.println("getCard Good case");
-        int i = 1;
+    public void testToStringGood() {
+        System.out.println("toString Good case");
         Deck instance = new Deck();
-        int expResult = 1;
-        Card result = instance.getCard(i);
+        String expResult = "";
+        String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
+    @Test
+    public void testToStringBad() {
+        System.out.println("toString Bad Case");
+        Deck instance = new Deck();
+        String expResult = "randomString";
+        String result = instance.toString();
+        assertNotEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    @Test
+    public void testToStringBoundary() {
+        System.out.println("toString Boundary case");
+        Deck instance = new Deck();
+        String expResult = "[]";
+        String result = instance.toString();
+        assertNotEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
     
-    @Test
-    public void testGetCardBad() {
-        System.out.println("getCard Bad case");
-        int i = 0;
-        Deck instance = new Deck();
-        int expResult = -8;
-        Card result = instance.getCard(i);
-        assertNotEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-  
-    @Test
-    public void testGetCardBoundary() {
-        System.out.println("getCard Boundary case");
-        int i = 0;
-        Deck instance = new Deck();
-        int expResult = 53 ;
-        Card result = instance.getCard(i);
-        assertNotEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
              
     /**
      * Test of deckSize method, of class Deck.
@@ -143,6 +139,6 @@ public class DeckTest {
         assertNotEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
-    }
-    
+    } 
+       
 }
