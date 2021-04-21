@@ -7,7 +7,7 @@ package blackjackgameconsole;
 
 /**
  *
- * @author neilb
+ * @author neilb, tommy chiu
  */
 
 import java.util.ArrayList;
