@@ -17,38 +17,40 @@ public class BlackJackGameConsole {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-          System.out.println("**** Welcome to Blackjack! ****");
+         System.out.println("**** Welcome to Blackjack Console! ****");
 
-        //playingDeck will be the deck the dealer holds
         Deck playingDeck = new Deck();
-        playingDeck.createFullDeck();
-        playingDeck.shuffle();
+        playingDeck.createFullDeck();    //Create full deck of cards
+        playingDeck.shuffle();           //Shuffle the deck
 
-        //playerCards will be the cards the player has in their hand
-        Deck playerCards = new Deck();
-        //playerMoney holds players cash - we will be lazy and use doubles instead of bigdecimals
-        double playerMoney = 100.0;
+
+        Deck   playerCards = new Deck();  //Deck for the player
+        double playerMoney = 100.0;       //Player money to bet
+
         //dealerCards will be the cards the dealer has in their hand
-        Deck dealerCards = new Deck();
+        Deck dealerCards   = new Deck();
 
         //Scanner for user input
-        Scanner userInput = new Scanner(System.in);
+        Scanner userInput  = new Scanner(System.in);
 
         //Play the game while the player has money
         //Game loop
         while(playerMoney>0){
             //Take Bet
-            System.out.println("You have $" + playerMoney + ", How much would you like to bet?");
+            System.out.println("Money[$" + playerMoney + "]\nHow much would you like to bet?");
             System.out.print(">");
             double playerBet = userInput.nextDouble();
             boolean endRound = false;
+
+
             if(playerBet > playerMoney){
-                //Break if they bet too much
-                System.out.println("Sorry, you cannot bet anymore");
+                //End the game if the user bet too much
+                System.out.println("Sorry you don't have enough money to bet that amount.");
                 break;
             }
 
             System.out.println("**** Dealing... ****");
+
             //Player gets two cards
             playerCards.draw(playingDeck);
             playerCards.draw(playingDeck);
@@ -57,36 +59,38 @@ public class BlackJackGameConsole {
             dealerCards.draw(playingDeck);
             dealerCards.draw(playingDeck);
 
-            //While loop for drawing new cards
-            while(true)
+            while(true)//While loop for drawing new cards
             {
                 //Display player cards
                 System.out.println("Your Hand:       " + playerCards.toString());
 
-                //Display Value
+                //Display player cards value
                 System.out.println("Your Hand value: " + playerCards.cardsValue());
 
                 //Display dealer cards
-                System.out.println("Dealer Hand:     " + dealerCards.getCard(0).toString() + " and [hidden]");
+                System.out.println("Dealer Hand:     [" + dealerCards.getCard(0).toString() + "]  [HIDDEN]");
 
-                //What do they want to do
+                //Player move option hit|stand
                 System.out.println("Select your move: \n[1]Hit\n[2]Stand");
-                System.out.print(">");
+                System.out.print  (">");
+
                 int response = userInput.nextInt();
-                //They hit
+
+                //If player choose to hit
                 if(response == 1){
                     playerCards.draw(playingDeck);
                     System.out.println("You draw a:" + playerCards.getCard(playerCards.deckSize()-1).toString());
-                    //Bust if they go over 21
+
+                    //Bust
                     if(playerCards.cardsValue() > 21){
-                        System.out.println("BUST! Value: " + playerCards.cardsValue());
+                        System.out.println("BUST! Value:" + playerCards.cardsValue());
                         playerMoney -= playerBet;
                         endRound = true;
-                        break;
+                        break;//Break the loop
                     }
                 }
 
-                //Stand
+                //If player choose to Stand
                 if(response == 2){
                     break;
                 }
@@ -94,22 +98,27 @@ public class BlackJackGameConsole {
             }
 
             //Reveal Dealer Cards
-            System.out.println("Dealer Cards:    " + dealerCards.toString());
-            //See if dealer has more points than player
-            if((dealerCards.cardsValue() > playerCards.cardsValue())&& !endRound){
-                System.out.println("Dealer beats you " + dealerCards.cardsValue() + " to " + playerCards.cardsValue());
+            System.out.println("Dealer Cards:" + dealerCards.toString());
+
+            //Compare dealer value to player card value
+            if((dealerCards.cardsValue() > playerCards.cardsValue()) && !endRound){
+                System.out.println("Dealer won! Dealer:" + dealerCards.cardsValue() + " Player " + playerCards.cardsValue());
                 playerMoney -= playerBet;
                 endRound = true;
             }
-            //Dealer hits at 16 stands at 17
+
+
+            //Dealer must hits at 16 and  stands at 17
+
             while((dealerCards.cardsValue() < 17) && !endRound)
             {
                 dealerCards.draw(playingDeck);
-                System.out.println("Dealer draws:    " + dealerCards.getCard(dealerCards.deckSize()-1).toString());
+                System.out.println("Dealer draws:" + dealerCards.getCard(dealerCards.deckSize()-1).toString());
             }
             //Display value of dealer
-            System.out.println("Dealers value:        " + dealerCards.cardsValue());
-            //Determine if dealer busted
+            System.out.println("Dealers value:" + dealerCards.cardsValue());
+
+            //Check if Dealer busted
             if((dealerCards.cardsValue()>21)&& !endRound){
                 System.out.println("Dealer Busts. You WIN!");
                 playerMoney += playerBet;
@@ -129,7 +138,7 @@ public class BlackJackGameConsole {
             }
             else if(!endRound) //dealer wins
             {
-                System.out.println("Sorry You Dealer win.");
+                System.out.println("Dealer win. Sorry you lost.");
                 playerMoney -= playerBet;
             }
 
@@ -140,7 +149,7 @@ public class BlackJackGameConsole {
 
         }
         //Game is over
-        System.out.println("GAME OVER! You lost all your money.");
+        System.out.println("GAME OVER! You don't have any money to bet.");
 
         //Close Scanner
         userInput.close();

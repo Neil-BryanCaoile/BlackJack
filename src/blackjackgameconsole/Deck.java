@@ -20,34 +20,33 @@ public class Deck {
         this.cards = new ArrayList<Card>();
     }
 
-    //Add 52 playing cards to a deck
+    //Add all cards to the deck [52 Cards]
     public void createFullDeck(){
         //Generate Cards
         //Loop Through Suits
         for(Suit cardSuit : Suit.values()){
             //Loop through Values
             for(Value cardValue : Value.values()){
-                //Add new card to the mix
+                //Add new card to the deck
                 this.cards.add(new Card(cardSuit,cardValue));
             }
         }
     }
 
-    //Shuffle deck of cards
+    //Shuffle the deck
     public void shuffle(){
-        //Create a new arraylist to hold the shuffled cards temporarily
-        ArrayList<Card> tmpDeck = new ArrayList<Card>();
-        //Randomly pick from the old deck and copy values to the new deck
+
+        ArrayList<Card> tmpDeck = new ArrayList<Card>();        //This is just temporary to hold cards
         Random random = new Random();
-        int randomCardIndex;
+        int randomIndex;
         int originalSize = this.cards.size();
         for(int i = 0; i<originalSize;i++){
             //gen random num according to int randomNum = rand.nextInt((max - min) + 1) + min;
-            randomCardIndex = random.nextInt((this.cards.size()-1 ) + 1);
+            randomIndex = random.nextInt((this.cards.size()-1 ) + 1);
             //throw random card into new deck
-            tmpDeck.add(this.cards.get(randomCardIndex));
+            tmpDeck.add(this.cards.get(randomIndex));
             //remove picked from old deck
-            this.cards.remove(randomCardIndex);
+            this.cards.remove(randomIndex);
         }
         //set this.deck to our newly shuffled deck
         this.cards = tmpDeck;
@@ -69,27 +68,27 @@ public class Deck {
     }
 
     //Draw a top card from deck
-    public void draw(Deck comingFrom){
+    public void draw(Deck c){
         //Add card to this deck from whatever deck its coming from
-        this.cards.add(comingFrom.getCard(0));
+        this.cards.add(c.getCard(0));
         //Remove the card in the deck its coming from
-        comingFrom.removeCard(0);
+        c.removeCard(0);
     }
 
     //Use to print out deck
     public String toString(){
         String cardListOutput = "";
         for(Card aCard : this.cards){
-            cardListOutput += "\n" + aCard.toString();
+            cardListOutput += "[" + aCard.toString() +"]  ";
         }
         return cardListOutput;
     }
 
-    public void moveAllToDeck(Deck moveTo){
+    public void moveAllToDeck(Deck c){
         int thisDeckSize = this.cards.size();
         //put cards in moveTo deck
         for(int i = 0; i < thisDeckSize; i++){
-            moveTo.addCard(this.getCard(i));
+            c.addCard(this.getCard(i));
         }
         //empty out the deck
         for(int i = 0; i < thisDeckSize; i++){
@@ -104,31 +103,25 @@ public class Deck {
     //Calculate the value of deck
     public int cardsValue(){
         int totalValue = 0;
-        int aces = 0;
+        int aces       = 0;
         //For every card in the deck
-        for(Card aCard : this.cards){
+        for(Card c : this.cards){
             //Switch of possible values
-            switch(aCard.getValue()){
-                case TWO: totalValue += 2; break;
+            switch(c.getValue()){
+                case TWO:   totalValue += 2; break;
                 case THREE: totalValue += 3; break;
-                case FOUR: totalValue += 4; break;
-                case FIVE: totalValue += 5; break;
-                case SIX: totalValue += 6; break;
+                case FOUR:  totalValue += 4; break;
+                case FIVE:  totalValue += 5; break;
+                case SIX:   totalValue += 6; break;
                 case SEVEN: totalValue += 7; break;
                 case EIGHT: totalValue += 8; break;
-                case NINE: totalValue += 9; break;
-                case TEN:
-                case JACK:
-                case QUEEN:
-                case KING:
-                    totalValue += 10; break;
+                case NINE:  totalValue += 9; break;
+                case TEN: case JACK: case QUEEN: case KING: totalValue += 10; break;
                 case ACE: aces += 1; break;
             }
         }
 
         //Determine the total current value with aces
-
-
         //Aces worth 11 or 1 - if 11 would go over 21 make it worth 1
         for(int i = 0; i < aces; i++){
             //If they're already at over 10 getting an ace valued at 11 would put them up to 22, so make ace worth one
