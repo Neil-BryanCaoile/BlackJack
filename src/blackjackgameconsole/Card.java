@@ -7,7 +7,7 @@ package blackjackgameconsole;
 
 /**
  *
- * @author neilb
+ * @author neilb, tommy chiu
  */
 
 public class Card {
