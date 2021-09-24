@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package blackjackgameconsole;
+package com.caoile;
 
-/**
- *
- * @author neilb, tommy chiu, Adrian Davies
- */
 import java.util.Scanner;
 
-public class BlackJackGameConsole {
+public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-         System.out.println("**** Welcome to Blackjack Console! ****");
+        System.out.println("**** Welcome to Blackjack Console! ****");
 
         Deck playingDeck = new Deck();
         playingDeck.createFullDeck();    //Create full deck of cards
@@ -154,5 +142,4 @@ public class BlackJackGameConsole {
         //Close Scanner
         userInput.close();
     }
-    
 }

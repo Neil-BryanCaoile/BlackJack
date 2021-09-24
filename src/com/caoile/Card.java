@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package blackjackgameconsole;
-
-/**
- *
- * @author neilb, tommy chiu, Adrian Davies
- */
+package com.caoile;
 
 public class Card {
     private final Suit suit;
